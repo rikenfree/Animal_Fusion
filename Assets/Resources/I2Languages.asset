@@ -15,7 +15,7 @@ MonoBehaviour:
   mSource:
     UserAgreesToHaveItOnTheScene: 0
     UserAgreesToHaveItInsideThePluginsFolder: 0
-    GoogleLiveSyncIsUptoDate: 1
+    GoogleLiveSyncIsUptoDate: 0
     mTerms:
     - Term: Choose Language
       TermType: 0
@@ -26,11 +26,25 @@ MonoBehaviour:
       - 
       - 
       - 
-      Flags: 0000000000
+      - 
+      Flags: 000000000000
+      Languages_Touch: []
+    - Term: Hi, How Are you guys.
+      TermType: 0
+      Description: 
+      Languages:
+      - Hi, How Are you guys.
+      - "Hola, \xBFc\xF3mo est\xE1n chicos?"
+      - Salut, comment allez-vous les gars ?
+      - Hai, apa kabar semuanya.
+      - "Ol\xE1, como voc\xEAs est\xE3o?"
+      - "\u0928\u092E\u0938\u094D\u0915\u093E\u0930, \u0906\u092A \u0932\u094B\u0917
+        \u0915\u0948\u0938\u0947 \u0939\u0948\u0902?"
+      Flags: 000000000000
       Languages_Touch: []
     CaseInsensitiveTerms: 0
     OnMissingTranslation: 1
-    mTerm_AppName: 
+    mTerm_AppName: Choose Language
     mLanguages:
     - Name: English
       Code: en
@@ -46,6 +60,9 @@ MonoBehaviour:
       Flags: 0
     - Name: Portuguese
       Code: pt
+      Flags: 0
+    - Name: Hindi
+      Code: hi
       Flags: 0
     IgnoreDeviceLanguage: 0
     _AllowUnloadingLanguages: 0
