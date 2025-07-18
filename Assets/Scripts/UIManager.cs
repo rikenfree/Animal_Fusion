@@ -5,6 +5,12 @@ using DG.Tweening;
 using DanielLochner.Assets.SimpleScrollSnap;
 using UnityEngine.UI;
 
+public enum Template
+{
+    VIDEO,
+    PHOTO
+}
+
 public class UIManager : MonoBehaviour
 {
     [Header("LODER")]
@@ -30,12 +36,21 @@ public class UIManager : MonoBehaviour
     public GameObject generateScreen;
     public GameObject generate_Screen;
     public GameObject playVideoScreen;
+    public GameObject collectionScreen;
 
     [Space(10)]
     [Header("SimpleScrollSnap")]
     [SerializeField] SimpleScrollSnap scrollSnap;
     [SerializeField] GameObject nextButton;
     [SerializeField] GameObject getStartedButton;
+
+    [Space(10)]
+    [Header("TemplateArea")]
+    public Image videoImage;
+    public Image photoImage;
+    public Sprite selectedTemplate;
+    public Sprite unSelectedTemplate;
+    public Template currentTemplate;
 
     private void Awake()
     {
@@ -51,7 +66,7 @@ public class UIManager : MonoBehaviour
     {
         int lastPanelIndex = scrollSnap.NumberOfPanels - 1;
         // Change the sprite according to the centered panel
-        
+
         if (centeredPanel == lastPanelIndex)
         {
             nextButton.SetActive(false);
@@ -84,7 +99,15 @@ public class UIManager : MonoBehaviour
                 IsStartSlider = false;
                 remainingTime = 0;
                 StopSlider();
-                OnOffPanels(lodingScreen, languageScreenStart);
+
+                if (IsTutorial == 0)
+                {
+                    OnOffPanels(lodingScreen, languageScreenStart);
+                }
+                else
+                {
+                    OnOffPanels(lodingScreen, mainScreen);
+                }
             }
         }
     }
@@ -124,5 +147,106 @@ public class UIManager : MonoBehaviour
     public void OnClickGetStarted()
     {
         OnOffPanels(tutorialScreen, mainScreen);
+        IsTutorial = 1;
+    }
+
+    public void OnClickSetting(bool IsBack)
+    {
+        if (IsBack)
+        {
+            OnOffPanels(settingScreen, mainScreen);
+        }
+        else
+        {
+            OnOffPanels(mainScreen, settingScreen);
+        }
+    }
+
+    public void OnClickCollection(bool IsBack)
+    {
+        if (IsBack)
+        {
+            OnOffPanels(collectionScreen, mainScreen);
+        }
+        else
+        {
+            OnOffPanels(mainScreen, collectionScreen);
+        }
+    }
+
+    public void OnClickMixAnimal(bool IsBack)
+    {
+        if (IsBack)
+        {
+            OnOffPanels(selectModeScreen, mainScreen);
+        }
+        else
+        {
+            OnOffPanels(mainScreen, selectModeScreen);
+        }
+    }
+
+    public void OnClickMix2(bool IsBack)
+    {
+        if (IsBack)
+        {
+            OnOffPanels(selectTemplateScreen, selectModeScreen);
+        }
+        else
+        {
+            OnOffPanels(selectModeScreen, selectTemplateScreen);
+        }
+    }
+
+    public void OnClickMix3(bool IsBack)
+    {
+        //if (IsBack)
+        //{
+        //    OnOffPanels(selectModeScreen, mainScreen);
+        //}
+        //else
+        //{
+        //    OnOffPanels(mainScreen, selectModeScreen);
+        //}
+    }
+
+    public void OnClickContinueButton(bool IsBack)
+    {
+        if (IsBack)
+        {
+            OnOffPanels(pick2ItemScreen, selectTemplateScreen);
+        }
+        else
+        {
+            OnOffPanels(selectTemplateScreen, pick2ItemScreen);
+        }
+    }
+
+    public void OnClickVideoScreen()
+    {
+        videoImage.sprite = selectedTemplate;
+        photoImage.sprite = unSelectedTemplate;
+
+        currentTemplate = Template.VIDEO;
+    }
+
+    public void OnClickPhotoScreen()
+    {
+        videoImage.sprite = unSelectedTemplate;
+        photoImage.sprite = selectedTemplate;
+
+        currentTemplate = Template.PHOTO;
+    }
+
+    public int IsTutorial
+    {
+        get
+        {
+            return PlayerPrefs.GetInt("IsTutorial", 0);
+        }
+        set
+        {
+            PlayerPrefs.SetInt("IsTutorial", value);
+        }
     }
 }
