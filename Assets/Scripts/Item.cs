@@ -21,15 +21,18 @@ public class Item : MonoBehaviour
 
     public void OnClick()
     {
-        if (String.IsNullOrEmpty(APIManager.Instance.firstChoice))
+        if (APIManager.Instance.IsFirstClick)
         {
             APIManager.Instance.firstChoice = animalName;
+            APIManager.Instance.IsFirstClick = false;
+            APIManager.Instance.IsSecondClick = true;
             return;
         }
 
-        if (String.IsNullOrEmpty(APIManager.Instance.secondChoice))
+        if (APIManager.Instance.IsSecondClick)
         {
             APIManager.Instance.secondChoice = animalName;
+            APIManager.Instance.nextChoiceButton.SetActive(true);
             return;
         }
     }

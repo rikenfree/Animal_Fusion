@@ -13,6 +13,8 @@ public enum Template
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance;
+
     [Header("LODER")]
     public GameObject lodingFillImage;
     public float totalTime;
@@ -52,8 +54,22 @@ public class UIManager : MonoBehaviour
     public Sprite unSelectedTemplate;
     public Template currentTemplate;
 
+    [Space(10)]
+    [Header("Generating")]
+    public GameObject animal1;
+    public GameObject animal2;
+    public float totalTimeGenerate;
+    public float remainingTimeGenerate;
+    public float speedGenerate;
+    private bool IsGenerate = false;
+
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+
         scrollSnap.OnPanelCentered.AddListener(OnPanelCentered);
     }
 
@@ -82,6 +98,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         remainingTime = totalTime;
+        remainingTimeGenerate = totalTimeGenerate;
         IsStartSlider = true;
         StartSlider();
     }
@@ -110,6 +127,26 @@ public class UIManager : MonoBehaviour
                 }
             }
         }
+
+        if (IsGenerate)
+        {
+            if (remainingTimeGenerate > 0)
+            {
+                remainingTimeGenerate -= Time.deltaTime * speed;
+            }
+            else
+            {
+                IsGenerate = false;
+                remainingTimeGenerate = 0;
+                OnOffPanels(generateScreen, generate_Screen);
+                VideoController.Instance.OnGeneratePlayVideo();
+            }
+        }
+    }
+
+    public void ResetGenerate()
+    {
+        
     }
 
     public void StartSlider()
@@ -236,6 +273,59 @@ public class UIManager : MonoBehaviour
         photoImage.sprite = selectedTemplate;
 
         currentTemplate = Template.PHOTO;
+    }
+
+    public void OnPickUpComplete()
+    {
+        remainingTimeGenerate = totalTimeGenerate;
+        OnOffPanels(pick2ItemScreen, generateScreen);
+        GenerateShake();
+    }
+
+    public void GenerateShake()
+    {
+        animal1.transform.DOShakePosition(
+            duration: 1f,
+            strength: new Vector3(20f, 20f, 1f),
+            vibrato: 15,
+            randomness: 90f,
+            snapping: false,
+            fadeOut: true
+        )
+        .SetEase(Ease.Linear)
+        .SetLoops(-1, LoopType.Yoyo);
+
+        animal2.transform.DOShakePosition(
+            duration: 1f,
+            strength: new Vector3(20f, 20f, 1f),
+            vibrato: 15,
+            randomness: 90f,
+            snapping: false,
+            fadeOut: true
+        )
+        .SetEase(Ease.Linear)
+        .SetLoops(-1, LoopType.Yoyo);
+
+        IsGenerate = true;
+    }
+
+    public void OnClickVideo(bool IsBack)
+    {
+        if (IsBack)
+        {
+            OnOffPanels(playVideoScreen, pick2ItemScreen);
+            APIManager.Instance.ResetAnimal();
+        }
+        else
+        {
+            OnOffPanels(generate_Screen, playVideoScreen);
+        }
+    }
+
+    public void OnClickHomeButton()
+    {
+        OnOffPanels(playVideoScreen, mainScreen);
+        APIManager.Instance.ResetAnimal();
     }
 
     public int IsTutorial
