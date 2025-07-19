@@ -140,13 +140,17 @@ public class UIManager : MonoBehaviour
                 remainingTimeGenerate = 0;
                 OnOffPanels(generateScreen, generate_Screen);
                 VideoController.Instance.OnGeneratePlayVideo();
+
+                if (currentTemplate == Template.VIDEO)
+                {
+                    APIManager.Instance.VideoPlayer.SetActive(true);
+                }
+                else
+                {
+                    APIManager.Instance.PhotoPlayer.SetActive(true);
+                }
             }
         }
-    }
-
-    public void ResetGenerate()
-    {
-        
     }
 
     public void StartSlider()
