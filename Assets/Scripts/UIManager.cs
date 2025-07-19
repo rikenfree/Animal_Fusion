@@ -181,6 +181,18 @@ public class UIManager : MonoBehaviour
         OnOffPanels(languageScreenStart, tutorialScreen);
     }
 
+    public void OnClickLanguageSelect(bool IsBack)
+    {
+        if (IsBack)
+        {
+            OnOffPanels(languageScreen, settingScreen);
+        }
+        else
+        {
+            OnOffPanels(settingScreen, languageScreen);
+        }
+    }
+
     public void OnClickGetStarted()
     {
         OnOffPanels(tutorialScreen, mainScreen);
