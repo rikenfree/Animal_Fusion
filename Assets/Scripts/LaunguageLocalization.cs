@@ -47,7 +47,7 @@ public class LaunguageLocalization : MonoBehaviour
     }
 
     [Space]
-    [Header("I2 Localize Refrence")]
+    [Header("<color=yellow> I2 Localize Refrence")]
 
     public Color selected;
     public Color unSelected;
@@ -132,16 +132,19 @@ public class LaunguageLocalization : MonoBehaviour
         newT.GetChild(0).GetComponent<TextMeshProUGUI>().color = selectedText;
         newT.GetChild(1).GetComponent<Image>().sprite = selectedSprite;
 
+
+
+
         //currentlanguage = Language[index].Code;
         //LocalizationManager.CurrentLanguageCode = currentlanguage;
-        //oldSelectedNob = index;
+        oldSelectedNob = index;
     }
 
-    public void OnClickChangelanguage()
+    public void OnClickCorrect()
     {
         currentlanguage = Language[currentId].Code;
         LocalizationManager.CurrentLanguageCode = currentlanguage;
-        oldSelectedNob = currentId;
+        //oldSelectedNob = currentId;
     }
 
     public void SetToDefault()
