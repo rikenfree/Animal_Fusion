@@ -15,17 +15,18 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
-    [Header("LODER")]
+    #region Loading
+    [Header("LOADER")]
     public GameObject lodingFillImage;
     public float totalTime;
-    public float remainingTime;
     public float speed;
+    private float remainingTime;
     private Coroutine sliderCoroutine;
-    private bool IsStartSlider = false;
+    private bool isStartSlider = false;
+    #endregion
 
-
-    [Space(10)]
-    [Header("UI SCREEN")]
+    #region UI Screens
+    [Header("UI SCREENS")]
     public GameObject lodingScreen;
     public GameObject languageScreenStart;
     public GameObject tutorialScreen;
@@ -39,30 +40,35 @@ public class UIManager : MonoBehaviour
     public GameObject generate_Screen;
     public GameObject playVideoScreen;
     public GameObject collectionScreen;
+    #endregion
 
-    [Space(10)]
+    #region ScrollSnap
     [Header("SimpleScrollSnap")]
-    [SerializeField] SimpleScrollSnap scrollSnap;
-    [SerializeField] GameObject nextButton;
-    [SerializeField] GameObject getStartedButton;
+    [SerializeField] private SimpleScrollSnap scrollSnap;
+    [SerializeField] private GameObject nextButton;
+    [SerializeField] private GameObject getStartedButton;
+    #endregion
 
-    [Space(10)]
-    [Header("TemplateArea")]
+    #region Template Selection
+    [Header("Template Area")]
     public Image videoImage;
     public Image photoImage;
     public Sprite selectedTemplate;
     public Sprite unSelectedTemplate;
     public Template currentTemplate;
+    #endregion
 
-    [Space(10)]
+    #region Generate
     [Header("Generating")]
     public GameObject animal1;
     public GameObject animal2;
     public float totalTimeGenerate;
-    public float remainingTimeGenerate;
     public float speedGenerate;
-    private bool IsGenerate = false;
+    private float remainingTimeGenerate;
+    private bool isGenerating = false;
+    #endregion
 
+    #region Unity Events
     private void Awake()
     {
         if (Instance == null)
@@ -78,81 +84,74 @@ public class UIManager : MonoBehaviour
         scrollSnap.OnPanelCentered.RemoveListener(OnPanelCentered);
     }
 
-    private void OnPanelCentered(int centeredPanel, int previousPanel)
-    {
-        int lastPanelIndex = scrollSnap.NumberOfPanels - 1;
-        // Change the sprite according to the centered panel
-
-        if (centeredPanel == lastPanelIndex)
-        {
-            nextButton.SetActive(false);
-            getStartedButton.SetActive(true);
-        }
-        else
-        {
-            nextButton.SetActive(true);
-            getStartedButton.SetActive(false);
-        }
-    }
-
     private void Start()
     {
         remainingTime = totalTime;
         remainingTimeGenerate = totalTimeGenerate;
-        IsStartSlider = true;
+        isStartSlider = true;
         StartSlider();
     }
 
     private void Update()
     {
-        if (IsStartSlider)
-        {
-            if (remainingTime > 0)
-            {
-                remainingTime -= Time.deltaTime * speed;
-            }
-            else
-            {
-                IsStartSlider = false;
-                remainingTime = 0;
-                StopSlider();
+        HandleLoader();
+        HandleGenerating();
+    }
+    #endregion
 
-                if (IsTutorial == 0)
-                {
-                    OnOffPanels(lodingScreen, languageScreenStart);
-                }
-                else
-                {
-                    OnOffPanels(lodingScreen, mainScreen);
-                }
-            }
+    #region Panel Control
+    private void HandleLoader()
+    {
+        if (!isStartSlider) return;
+
+        if (remainingTime > 0)
+        {
+            remainingTime -= Time.deltaTime * speed;
         }
-
-        if (IsGenerate)
+        else
         {
-            if (remainingTimeGenerate > 0)
-            {
-                remainingTimeGenerate -= Time.deltaTime * speed;
-            }
-            else
-            {
-                IsGenerate = false;
-                remainingTimeGenerate = 0;
-                OnOffPanels(generateScreen, generate_Screen);
-                VideoController.Instance.OnGeneratePlayVideo();
+            isStartSlider = false;
+            remainingTime = 0;
+            StopSlider();
 
-                if (currentTemplate == Template.VIDEO)
-                {
-                    APIManager.Instance.VideoPlayer.SetActive(true);
-                }
-                else
-                {
-                    APIManager.Instance.PhotoPlayer.SetActive(true);
-                }
-            }
+            if (IsTutorial == 0)
+                OnOffPanels(lodingScreen, languageScreenStart);
+            else
+                OnOffPanels(lodingScreen, mainScreen);
         }
     }
 
+    private void HandleGenerating()
+    {
+        if (!isGenerating) return;
+
+        if (remainingTimeGenerate > 0)
+        {
+            remainingTimeGenerate -= Time.deltaTime * speedGenerate;
+        }
+        else
+        {
+            isGenerating = false;
+            remainingTimeGenerate = 0;
+            OnOffPanels(generateScreen, generate_Screen);
+            VideoController.Instance.OnGeneratePlayVideo();
+
+            if (currentTemplate == Template.VIDEO)
+            {
+                APIManager.Instance.VideoPlayer.SetActive(true);
+                APIManager.Instance.PhotoPlayer.SetActive(false);
+            }
+            else
+            {
+                APIManager.Instance.PhotoPlayer.SetActive(true);
+                APIManager.Instance.VideoPlayer.SetActive(false);
+                APIManager.Instance.ApplyImage();
+            }
+        }
+    }
+    #endregion
+
+    #region Slider
     public void StartSlider()
     {
         sliderCoroutine = StartCoroutine(MoveSlider());
@@ -160,10 +159,14 @@ public class UIManager : MonoBehaviour
 
     public void StopSlider()
     {
-        StopCoroutine(sliderCoroutine);
+        if (sliderCoroutine != null)
+        {
+            StopCoroutine(sliderCoroutine);
+            sliderCoroutine = null;
+        }
     }
 
-    public IEnumerator MoveSlider()
+    private IEnumerator MoveSlider()
     {
         lodingFillImage.transform.DOLocalMoveX(190, 1f).SetEase(Ease.Linear).OnComplete(() =>
         {
@@ -173,28 +176,32 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         StartSlider();
     }
+    #endregion
 
+    #region Panel Transitions
     public void OnOffPanels(GameObject previousPanel, GameObject nextPanel)
     {
         nextPanel.SetActive(true);
         previousPanel.SetActive(false);
     }
+    #endregion
 
-    public void OnClickSelectedLanguage()
+    #region ScrollSnap Callback
+    private void OnPanelCentered(int centeredPanel, int previousPanel)
     {
-        OnOffPanels(languageScreenStart, tutorialScreen);
+        int lastPanelIndex = scrollSnap.NumberOfPanels - 1;
+
+        nextButton.SetActive(centeredPanel != lastPanelIndex);
+        getStartedButton.SetActive(centeredPanel == lastPanelIndex);
     }
+    #endregion
 
-    public void OnClickLanguageSelect(bool IsBack)
+    #region Button Click Events
+    public void OnClickSelectedLanguage() => OnOffPanels(languageScreenStart, tutorialScreen);
+
+    public void OnClickLanguageSelect(bool isBack)
     {
-        if (IsBack)
-        {
-            OnOffPanels(languageScreen, settingScreen);
-        }
-        else
-        {
-            OnOffPanels(settingScreen, languageScreen);
-        }
+        OnOffPanels(isBack ? languageScreen : settingScreen, isBack ? settingScreen : languageScreen);
     }
 
     public void OnClickGetStarted()
@@ -203,83 +210,40 @@ public class UIManager : MonoBehaviour
         IsTutorial = 1;
     }
 
-    public void OnClickSetting(bool IsBack)
+    public void OnClickSetting(bool isBack)
     {
-        if (IsBack)
-        {
-            OnOffPanels(settingScreen, mainScreen);
-        }
-        else
-        {
-            OnOffPanels(mainScreen, settingScreen);
-        }
+        OnOffPanels(isBack ? settingScreen : mainScreen, isBack ? mainScreen : settingScreen);
     }
 
-    public void OnClickCollection(bool IsBack)
+    public void OnClickCollection(bool isBack)
     {
-        if (IsBack)
-        {
-            OnOffPanels(collectionScreen, mainScreen);
-        }
-        else
-        {
-            OnOffPanels(mainScreen, collectionScreen);
-        }
+        OnOffPanels(isBack ? collectionScreen : mainScreen, isBack ? mainScreen : collectionScreen);
     }
 
-    public void OnClickMixAnimal(bool IsBack)
+    public void OnClickMixAnimal(bool isBack)
     {
-        if (IsBack)
-        {
-            OnOffPanels(selectModeScreen, mainScreen);
-        }
-        else
-        {
-            OnOffPanels(mainScreen, selectModeScreen);
-        }
+        OnOffPanels(isBack ? selectModeScreen : mainScreen, isBack ? mainScreen : selectModeScreen);
     }
 
-    public void OnClickMix2(bool IsBack)
+    public void OnClickMix2(bool isBack)
     {
-        if (IsBack)
-        {
-            OnOffPanels(selectTemplateScreen, selectModeScreen);
-        }
-        else
-        {
-            OnOffPanels(selectModeScreen, selectTemplateScreen);
-        }
+        OnOffPanels(isBack ? selectTemplateScreen : selectModeScreen, isBack ? selectModeScreen : selectTemplateScreen);
     }
 
-    public void OnClickMix3(bool IsBack)
+    public void OnClickMix3(bool isBack)
     {
-        //if (IsBack)
-        //{
-        //    OnOffPanels(selectModeScreen, mainScreen);
-        //}
-        //else
-        //{
-        //    OnOffPanels(mainScreen, selectModeScreen);
-        //}
+        // Unused - implement if needed
     }
 
-    public void OnClickContinueButton(bool IsBack)
+    public void OnClickContinueButton(bool isBack)
     {
-        if (IsBack)
-        {
-            OnOffPanels(pick2ItemScreen, selectTemplateScreen);
-        }
-        else
-        {
-            OnOffPanels(selectTemplateScreen, pick2ItemScreen);
-        }
+        OnOffPanels(isBack ? pick2ItemScreen : selectTemplateScreen, isBack ? selectTemplateScreen : pick2ItemScreen);
     }
 
     public void OnClickVideoScreen()
     {
         videoImage.sprite = selectedTemplate;
         photoImage.sprite = unSelectedTemplate;
-
         currentTemplate = Template.VIDEO;
     }
 
@@ -287,47 +251,12 @@ public class UIManager : MonoBehaviour
     {
         videoImage.sprite = unSelectedTemplate;
         photoImage.sprite = selectedTemplate;
-
         currentTemplate = Template.PHOTO;
     }
 
-    public void OnPickUpComplete()
+    public void OnClickVideo(bool isBack)
     {
-        remainingTimeGenerate = totalTimeGenerate;
-        OnOffPanels(pick2ItemScreen, generateScreen);
-        GenerateShake();
-    }
-
-    public void GenerateShake()
-    {
-        animal1.transform.DOShakePosition(
-            duration: 1f,
-            strength: new Vector3(20f, 20f, 1f),
-            vibrato: 15,
-            randomness: 90f,
-            snapping: false,
-            fadeOut: true
-        )
-        .SetEase(Ease.Linear)
-        .SetLoops(-1, LoopType.Yoyo);
-
-        animal2.transform.DOShakePosition(
-            duration: 1f,
-            strength: new Vector3(20f, 20f, 1f),
-            vibrato: 15,
-            randomness: 90f,
-            snapping: false,
-            fadeOut: true
-        )
-        .SetEase(Ease.Linear)
-        .SetLoops(-1, LoopType.Yoyo);
-
-        IsGenerate = true;
-    }
-
-    public void OnClickVideo(bool IsBack)
-    {
-        if (IsBack)
+        if (isBack)
         {
             OnOffPanels(playVideoScreen, pick2ItemScreen);
             APIManager.Instance.ResetAnimal();
@@ -343,16 +272,35 @@ public class UIManager : MonoBehaviour
         OnOffPanels(playVideoScreen, mainScreen);
         APIManager.Instance.ResetAnimal();
     }
+    #endregion
 
+    #region Generate Animation
+    public void OnPickUpComplete()
+    {
+        remainingTimeGenerate = totalTimeGenerate;
+        OnOffPanels(pick2ItemScreen, generateScreen);
+        GenerateShake();
+    }
+
+    private void GenerateShake()
+    {
+        animal1.transform.DOShakePosition(1f, new Vector3(20f, 20f, 1f), 15, 90f, false, true)
+              .SetEase(Ease.Linear)
+              .SetLoops(-1, LoopType.Yoyo);
+
+        animal2.transform.DOShakePosition(1f, new Vector3(20f, 20f, 1f), 15, 90f, false, true)
+              .SetEase(Ease.Linear)
+              .SetLoops(-1, LoopType.Yoyo);
+
+        isGenerating = true;
+    }
+    #endregion
+
+    #region Tutorial Flag
     public int IsTutorial
     {
-        get
-        {
-            return PlayerPrefs.GetInt("IsTutorial", 0);
-        }
-        set
-        {
-            PlayerPrefs.SetInt("IsTutorial", value);
-        }
+        get => PlayerPrefs.GetInt("IsTutorial", 0);
+        set => PlayerPrefs.SetInt("IsTutorial", value);
     }
+    #endregion
 }
