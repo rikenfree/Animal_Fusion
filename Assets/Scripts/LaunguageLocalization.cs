@@ -1,5 +1,7 @@
 ﻿using DG.Tweening;
 using I2.Loc;
+using System;
+
 //using Main.Controller;
 using System.Collections.Generic;
 using TMPro;
@@ -130,11 +132,16 @@ public class LaunguageLocalization : MonoBehaviour
         newT.GetChild(0).GetComponent<TextMeshProUGUI>().color = selectedText;
         newT.GetChild(1).GetComponent<Image>().sprite = selectedSprite;
 
+        //currentlanguage = Language[index].Code;
+        //LocalizationManager.CurrentLanguageCode = currentlanguage;
+        //oldSelectedNob = index;
+    }
 
-
-        currentlanguage = Language[index].Code;
+    public void OnClickChangelanguage()
+    {
+        currentlanguage = Language[currentId].Code;
         LocalizationManager.CurrentLanguageCode = currentlanguage;
-        oldSelectedNob = index;
+        oldSelectedNob = currentId;
     }
 
     public void SetToDefault()

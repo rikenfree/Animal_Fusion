@@ -21,13 +21,15 @@ MonoBehaviour:
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      - 
-      - 
-      - 
-      - 
-      Flags: 000000000000
+      - Choose Language
+      - Elegir Idioma
+      - Choisir La Langue
+      - Pilih Bahasa
+      - Escolha O Idioma
+      - "\u092D\u093E\u0937\u093E \u091A\u0941\u0928\u0947\u0902"
+      - "Sprache W\xE4hlen"
+      - Taal Kiezen
+      Flags: 0000000000000000
       Languages_Touch: []
     - Term: Hi, How Are you guys.
       TermType: 0
@@ -40,7 +42,399 @@ MonoBehaviour:
       - "Ol\xE1, como voc\xEAs est\xE3o?"
       - "\u0928\u092E\u0938\u094D\u0915\u093E\u0930, \u0906\u092A \u0932\u094B\u0917
         \u0915\u0948\u0938\u0947 \u0939\u0948\u0902?"
-      Flags: 000000000000
+      - 
+      - 
+      Flags: 0000000000000000
+      Languages_Touch: []
+    - Term: LOADING..
+      TermType: 0
+      Description: 
+      Languages:
+      - Loading..
+      - Cargando..
+      - Chargement..
+      - Memuat..
+      - Carregando..
+      - "\u0932\u094B\u0921 \u0939\u094B \u0930\u0939\u093E \u0939\u0948.."
+      - Laden..
+      - Laden..
+      Flags: 0000000000000000
+      Languages_Touch: []
+    - Term: This action may contain ads..
+      TermType: 0
+      Description: 
+      Languages:
+      - This action may contain ads..
+      - "Esta acci\xF3n puede contener anuncios."
+      - "Cette action peut contenir des publicit\xE9s."
+      - Tindakan ini mungkin berisi iklan.
+      - "Esta a\xE7\xE3o pode conter an\xFAncios."
+      - "\u0907\u0938 \u0915\u093E\u0930\u094D\u0930\u0935\u093E\u0908 \u092E\u0947\u0902
+        \u0935\u093F\u091C\u094D\u091E\u093E\u092A\u0928 \u0936\u093E\u092E\u093F\u0932
+        \u0939\u094B \u0938\u0915\u0924\u0947 \u0939\u0948\u0902."
+      - Diese Aktion kann Werbung enthalten.
+      - Deze actie kan advertenties bevatten.
+      Flags: 0000000000000000
+      Languages_Touch: []
+    - Term: Setting
+      TermType: 0
+      Description: 
+      Languages:
+      - Setting
+      - "Configuraci\xF3n"
+      - "Param\xE8tre"
+      - Pengaturan
+      - Contexto
+      - "\u0938\u0947\u091F\u093F\u0902\u0917"
+      - Einstellung
+      - Instelling
+      Flags: 0000000000000000
+      Languages_Touch: []
+    - Term: Music
+      TermType: 0
+      Description: 
+      Languages:
+      - Music
+      - "M\xFAsica"
+      - Musique
+      - Musik
+      - "M\xFAsica"
+      - "\u0938\u0902\u0917\u0940\u0924"
+      - Musik
+      - Muziek
+      Flags: 0000000000000000
+      Languages_Touch: []
+    - Term: Sound FX
+      TermType: 0
+      Description: 
+      Languages:
+      - Sound Fx
+      - Efectos De Sonido
+      - Effets Sonores
+      - Efek Suara
+      - Efeitos Sonoros
+      - "\u0927\u094D\u0935\u0928\u093F Fx"
+      - Soundeffekte
+      - Geluidseffecten
+      Flags: 0000000000000000
+      Languages_Touch: []
+    - Term: Vibrate
+      TermType: 0
+      Description: 
+      Languages:
+      - Vibrate
+      - Vibrar
+      - Vibrer
+      - Bergetar
+      - Vibrar
+      - "\u0915\u0902\u092A\u0928"
+      - Vibrieren
+      - Trillen
+      Flags: 0000000000000000
+      Languages_Touch: []
+    - Term: Policy
+      TermType: 0
+      Description: 
+      Languages:
+      - Policy
+      - "Pol\xEDtica"
+      - Politique
+      - Kebijakan
+      - "Pol\xEDtica"
+      - "\u0928\u0940\u0924\u093F"
+      - Politik
+      - Beleid
+      Flags: 0000000000000000
+      Languages_Touch: []
+    - Term: Feedback
+      TermType: 0
+      Description: 
+      Languages:
+      - Feedback
+      - Comentario
+      - Retour
+      - Masukan
+      - "Opini\xE3o"
+      - "\u092A\u094D\u0930\u0924\u093F\u0915\u094D\u0930\u093F\u092F\u093E"
+      - "R\xFCckmeldung"
+      - Feedback
+      Flags: 0000000000000000
+      Languages_Touch: []
+    - Term: Rate 5 Star
+      TermType: 0
+      Description: 
+      Languages:
+      - Rate 5 Star
+      - Calificar 5 Estrellas
+      - "Noter 5 \xC9toiles"
+      - Beri Peringkat 5 Bintang
+      - Avaliar 5 Estrelas
+      - "5 \u0938\u094D\u091F\u093E\u0930 \u0930\u0947\u091F\u093F\u0902\u0917"
+      - Bewertung 5 Sterne
+      - 5 Sterren Geven
+      Flags: 0000000000000000
+      Languages_Touch: []
+    - Term: Share with your Friends
+      TermType: 0
+      Description: 
+      Languages:
+      - Share with your Friends
+      - Comparte con tus amigos
+      - Partagez avec vos amis
+      - Bagikan dengan Teman Anda
+      - Compartilhe com seus amigos
+      - "\u0905\u092A\u0928\u0947 \u0926\u094B\u0938\u094D\u0924\u094B\u0902 \u0915\u0947
+        \u0938\u093E\u0925 \u0938\u093E\u091D\u093E \u0915\u0930\u0947\u0902"
+      - Teile mit deinen Freunden
+      - Deel met je vrienden
+      Flags: 0000000000000000
+      Languages_Touch: []
+    - Term: Language
+      TermType: 0
+      Description: 
+      Languages:
+      - Language
+      - Idioma
+      - Langue
+      - Bahasa
+      - Linguagem
+      - "\u092D\u093E\u0937\u093E"
+      - Sprache
+      - Taal
+      Flags: 0000000000000000
+      Languages_Touch: []
+    - Term: Collection
+      TermType: 0
+      Description: 
+      Languages:
+      - Collection
+      - "Recopilaci\xF3n"
+      - Collection
+      - Koleksi
+      - "Cole\xE7\xE3o"
+      - "\u0938\u0902\u0917\u094D\u0930\u0939"
+      - Sammlung
+      - Verzameling
+      Flags: 0000000000000000
+      Languages_Touch: []
+    - Term: All
+      TermType: 0
+      Description: 
+      Languages:
+      - All
+      - Todo
+      - Tous
+      - Semua
+      - Todos
+      - "\u0938\u092D\u0940"
+      - Alle
+      - Alle
+      Flags: 0000000000000000
+      Languages_Touch: []
+    - Term: Favorite
+      TermType: 0
+      Description: 
+      Languages:
+      - Favorite
+      - Favorito
+      - "Pr\xE9f\xE9r\xE9"
+      - Favorit
+      - Favorito
+      - "\u092A\u0938\u0902\u0926\u0940\u0926\u093E"
+      - Favorit
+      - Favoriet
+      Flags: 0000000000000000
+      Languages_Touch: []
+    - Term: Photo
+      TermType: 0
+      Description: 
+      Languages:
+      - Photo
+      - Foto
+      - Photo
+      - Foto
+      - Foto
+      - "\u0924\u0938\u094D\u0935\u0940\u0930"
+      - Foto
+      - Foto
+      Flags: 0000000000000000
+      Languages_Touch: []
+    - Term: Video
+      TermType: 0
+      Description: 
+      Languages:
+      - Video
+      - Video
+      - "Vid\xE9o"
+      - Video
+      - "V\xEDdeo"
+      - "\u0935\u0940\u0921\u093F\u092F\u094B"
+      - Video
+      - Video
+      Flags: 0000000000000000
+      Languages_Touch: []
+    - Term: Select Mode
+      TermType: 0
+      Description: 
+      Languages:
+      - Select Mode
+      - Seleccionar Modo
+      - "S\xE9lectionner Le Mode"
+      - Pilih Mode
+      - "Modo De Sele\xE7\xE3o"
+      - "\u092E\u094B\u0921 \u0915\u093E \u091A\u092F\u0928 \u0915\u0930\u0947\u0902"
+      - Auswahlmodus
+      - Selecteer Modus
+      Flags: 0000000000000000
+      Languages_Touch: []
+    - Term: Select Template
+      TermType: 0
+      Description: 
+      Languages:
+      - Select Template
+      - Seleccionar Plantilla
+      - "S\xE9lectionner Un Mod\xE8le"
+      - Pilih Templat
+      - Selecionar Modelo
+      - "\u091F\u0947\u092E\u094D\u092A\u0932\u0947\u091F \u091A\u0941\u0928\u0947\u0902"
+      - "Vorlage Ausw\xE4hlen"
+      - Selecteer Sjabloon
+      Flags: 0000000000000000
+      Languages_Touch: []
+    - Term: VIDEO
+      TermType: 0
+      Description: 
+      Languages:
+      - Video
+      - Video
+      - "Vid\xE9o"
+      - Video
+      - "V\xEDdeo"
+      - "\u0935\u0940\u0921\u093F\u092F\u094B"
+      - Video
+      - Video
+      Flags: 0000000000000000
+      Languages_Touch: []
+    - Term: PHOTO
+      TermType: 0
+      Description: 
+      Languages:
+      - Photo
+      - Foto
+      - Photo
+      - Foto
+      - Foto
+      - "\u0924\u0938\u094D\u0935\u0940\u0930"
+      - Foto
+      - Foto
+      Flags: 0000000000000000
+      Languages_Touch: []
+    - Term: 'Create video: Create a motion video of the mixed animals'
+      TermType: 0
+      Description: 
+      Languages:
+      - <color=#0000FF> Create video:</color>  Create a motion video of the mixed
+        animals
+      - "<color=#0000FF> Crear v\xEDdeo:</color> Crear un v\xEDdeo en movimiento
+        de los animales mixtos"
+      - "<color=#0000FF> Cr\xE9er une vid\xE9o\_:</color> Cr\xE9er une vid\xE9o anim\xE9e
+        des animaux m\xE9lang\xE9s"
+      - <color=#0000FF> Buat video:</color> Buat video gerak hewan campuran
+      - "<color=#0000FF> Criar v\xEDdeo:</color> Criar um v\xEDdeo em movimento dos
+        animais misturados"
+      - "<color=#0000FF> \u0935\u0940\u0921\u093F\u092F\u094B \u092C\u0928\u093E\u090F\u0901:</color>
+        \u092E\u093F\u0936\u094D\u0930\u093F\u0924 \u091C\u093E\u0928\u0935\u0930\u094B\u0902
+        \u0915\u093E \u090F\u0915 \u092E\u094B\u0936\u0928 \u0935\u0940\u0921\u093F\u092F\u094B
+        \u092C\u0928\u093E\u090F\u0901"
+      - <color=#0000FF> Video erstellen:</color> Erstellen Sie ein Bewegungsvideo
+        der gemischten Tiere
+      - <color=#0000FF> Video maken:</color> Maak een bewegende video van de gemengde
+        dieren
+      Flags: 0000000000000000
+      Languages_Touch: []
+    - Term: Pick 2nd Item
+      TermType: 0
+      Description: 
+      Languages:
+      - Pick 2nd Item
+      - "Elija El Segundo Art\xEDculo"
+      - Choisissez Le 2e Article
+      - Pilih Item Ke-2
+      - "Escolha O 2\xBA Item"
+      - "\u0926\u0942\u0938\u0930\u093E \u0906\u0907\u091F\u092E \u091A\u0941\u0928\u0947\u0902"
+      - "2. Artikel Ausw\xE4hlen"
+      - Kies 2e Item
+      Flags: 0000000000000000
+      Languages_Touch: []
+    - Term: Generating
+      TermType: 0
+      Description: 
+      Languages:
+      - Generating
+      - Generando
+      - "G\xE9n\xE9rateur"
+      - Menghasilkan
+      - Gerando
+      - "\u0909\u0924\u094D\u092A\u093E\u0926\u0915"
+      - Generierung
+      - Genereren
+      Flags: 0000000000000000
+      Languages_Touch: []
+    - Term: CREATE MORE
+      TermType: 0
+      Description: 
+      Languages:
+      - Create More
+      - "Crear M\xE1s"
+      - "Cr\xE9er Plus"
+      - Menciptakan Lebih Banyak
+      - Criar Mais
+      - "\u0905\u0927\u093F\u0915 \u092C\u0928\u093E\u090F\u0901"
+      - Mehr Schaffen
+      - "Meer Cre\xEBren"
+      Flags: 0000000000000000
+      Languages_Touch: []
+    - Term: Save
+      TermType: 0
+      Description: 
+      Languages:
+      - Save
+      - Ahorrar
+      - Sauvegarder
+      - Menyimpan
+      - Salvar
+      - "\u092C\u091A\u093E\u0928\u093E"
+      - Speichern
+      - 'Redden '
+      Flags: 0000000000000000
+      Languages_Touch: []
+    - Term: Wallpaper
+      TermType: 0
+      Description: 
+      Languages:
+      - Wallpaper
+      - Papel Pintado
+      - Papier Peint
+      - Kertas Dinding
+      - Papel De Parede
+      - "\u0935\u0949\u0932\u092A\u0947\u092A\u0930"
+      - Tapete
+      - Behang
+      Flags: 0000000000000000
+      Languages_Touch: []
+    - Term: Share
+      TermType: 0
+      Description: 
+      Languages:
+      - Share
+      - Compartir
+      - Partager
+      - Membagikan
+      - Compartilhar
+      - "\u0936\u0947\u092F\u0930 \u0915\u0930\u0928\u093E"
+      - Aktie
+      - Deel
+      Flags: 0000000000000000
       Languages_Touch: []
     CaseInsensitiveTerms: 0
     OnMissingTranslation: 1
@@ -63,6 +457,12 @@ MonoBehaviour:
       Flags: 0
     - Name: Hindi
       Code: hi
+      Flags: 0
+    - Name: German
+      Code: de
+      Flags: 0
+    - Name: Dutch
+      Code: nl
       Flags: 0
     IgnoreDeviceLanguage: 0
     _AllowUnloadingLanguages: 0
