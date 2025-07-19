@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Item : MonoBehaviour
 {
+    [Header("Animal Info")]
     public string animalName;
     public Sprite animalSprite;
 
@@ -14,40 +15,61 @@ public class Item : MonoBehaviour
     private void Start()
     {
         button = GetComponent<Button>();
-        button.onClick.AddListener(() =>
-        {
-            OnClick();
-        });
+
+        if (button != null)
+            button.onClick.AddListener(OnClick);
+        else
+            Debug.LogWarning("Button component missing on Item GameObject.");
     }
 
     public void OnClick()
     {
+        if (APIManager.Instance == null)
+        {
+            Debug.LogError("APIManager instance not found.");
+            return;
+        }
+
         if (APIManager.Instance.IsFirstClick)
         {
-            APIManager.Instance.firstChoice = animalName;
-            APIManager.Instance.IsFirstClick = false;
-            APIManager.Instance.IsSecondClick = true;
-
-            APIManager.Instance.firstSection.SetActive(false);
-            APIManager.Instance.secondSection.SetActive(true);
-
-            APIManager.Instance.currentFirstSelection = this.gameObject;
-            APIManager.Instance.firstSelectionG1.sprite = animalSprite;
-            APIManager.Instance.firstSelectionG2.sprite = animalSprite;
-            return;
+            SelectAsFirstChoice();
         }
-
-        if (APIManager.Instance.IsSecondClick)
+        else if (APIManager.Instance.IsSecondClick)
         {
-            APIManager.Instance.secondChoice = animalName;
-            APIManager.Instance.nextChoiceButton.SetActive(true);
-
-            APIManager.Instance.currentSecondSelection = this.gameObject;
-            APIManager.Instance.secondSelectionG1.sprite = animalSprite;
-            APIManager.Instance.secondSelectionG2.sprite = animalSprite;
-
-            return;
+            SelectAsSecondChoice();
         }
+    }
+
+    private void SelectAsFirstChoice()
+    {
+        var api = APIManager.Instance;
+
+        api.firstChoice = animalName;
+        api.IsFirstClick = false;
+        api.IsSecondClick = true;
+
+        api.firstSection.SetActive(false);
+        api.secondSection.SetActive(true);
+
+        api.currentFirstSelection = gameObject;
+        api.firstSelectionG1.sprite = animalSprite;
+        api.firstSelectionG2.sprite = animalSprite;
+
+        api.firstSelectionG1.gameObject.SetActive(true);
+    }
+
+    private void SelectAsSecondChoice()
+    {
+        var api = APIManager.Instance;
+
+        api.secondChoice = animalName;
+        api.nextChoiceButton.SetActive(true);
+
+        api.currentSecondSelection = gameObject;
+        api.secondSelectionG1.sprite = animalSprite;
+        api.secondSelectionG2.sprite = animalSprite;
+
+        api.secondSelectionG1.gameObject.SetActive(true);
     }
 
 }
